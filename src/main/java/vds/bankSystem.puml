@@ -1,0 +1,158 @@
+@startuml
+package Http {
+    [UserAccountController]
+    frame "RegisterAccount"
+    frame "ActiveAccount"
+    UserAccountController --> RegisterAccount
+    UserAccountController --> ActiveAccount
+
+
+}
+
+package GenericDomain {
+    [EmailAccount]
+    [MobileAccount]
+}
+
+
+package Domain {
+    [UserAccount]
+    frame "Register"
+    frame "Active"
+    UserAccount --> Register
+    UserAccount --> Active
+    Register --> EmailAccount
+    Register --> MobileAccount
+    Active --> EmailAccount
+    Active --> MobileAccount
+}
+
+package Infrastructure {
+    package Repository {
+        [UserAccountRepo]
+    }
+}
+
+package SPI {
+    [UserAccountService]
+    frame "_RegisterAccount"
+    frame "_ActiveAccount"
+
+    RegisterAccount --> UserAccountService
+    ActiveAccount --> UserAccountService
+    UserAccountService --> _RegisterAccount
+    UserAccountService --> _ActiveAccount
+    _ActiveAccount -left-> Active
+    _RegisterAccount -left-> Register
+    _ActiveAccount -right-> UserAccountRepo
+    _RegisterAccount -right-> UserAccountRepo
+
+}
+@enduml
+
+@startuml
+package Http {
+    [UserAccountController]
+    frame "DepositByBank"
+    frame "DepositByMobileMoney"
+    UserAccountController --> DepositByBank
+    UserAccountController --> DepositByMobileMoney
+
+
+}
+
+package GenericDomain {
+    [BankTransfer]
+    [MobileMoney]
+}
+
+
+package Domain {
+    [Deposit]
+    frame "DepositMoney"
+    Deposit --> DepositMoney
+    DepositMoney --> BankTransfer
+    DepositMoney --> MobileMoney
+
+}
+
+package Infrastructure {
+    package Repository {
+        [DepositRepo]
+    }
+}
+
+package SPI {
+    [UserAccountService]
+    frame "_DepositByBank"
+    frame "_DepositByMobileMoney"
+
+    DepositByBank --> UserAccountService
+    DepositByMobileMoney --> UserAccountService
+    UserAccountService --> _DepositByBank
+    UserAccountService --> _DepositByMobileMoney
+    _DepositByBank -left-> DepositMoney :WithProviderBank
+    _DepositByMobileMoney -left-> DepositMoney :WithProviderMobileMoney
+    _DepositByBank -right-> DepositRepo
+    _DepositByMobileMoney -right-> DepositRepo
+
+
+}
+@enduml
+
+@startuml
+package Http {
+    [UserAccountController]
+    frame "TransferByUserID"
+    frame "TransferByMobileNumber"
+    UserAccountController --> TransferByUserID
+    UserAccountController --> TransferByMobileNumber
+
+
+}
+
+
+package Domain {
+    [UserMoney]
+    frame "DepositMoney"
+    frame "CalculateSubMoney"
+    UserMoney --> DepositMoney
+    UserMoney --> CalculateSubMoney
+
+
+}
+
+package Infrastructure {
+    [Publisher]
+    package Repository {
+        [UserMoneyRepo]
+        [UserAccountRepo]
+        [TrackingTransferRepo]
+    }
+    [UserMoneyAvailable]
+
+}
+
+package SPI {
+    [UserAccountService]
+
+
+    package Transfer {
+     frame "_TransferByUserID"
+     frame "_TransferByMobileNumber"
+    }
+
+    TransferByUserID --> UserAccountService
+    TransferByMobileNumber --> UserAccountService
+    UserAccountService --> _TransferByUserID
+    UserAccountService --> _TransferByMobileNumber
+    Transfer -up-> CalculateSubMoney : if available then sub money from sender
+    Transfer -up-> DepositMoney : deposit money for receiver
+    Transfer -down-> UserMoneyAvailable : check money available
+    Transfer -down-> UserMoneyRepo : update money for sender and receiver
+    Transfer -down-> TrackingTransferRepo
+    Transfer -down-> Publisher : send email or mobile
+
+    _TransferByMobileNumber -down-> UserAccountRepo : Get user by mobile number
+}
+@enduml
