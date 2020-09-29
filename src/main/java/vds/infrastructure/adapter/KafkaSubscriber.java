@@ -1,6 +1,6 @@
 package vds.infrastructure.adapter;
 
-import vds.spi.PubSub;
+import vds.spi.PubSubInterface;
 
-public class KafkaSubscriber implements PubSub {
+public class KafkaSubscriber implements PubSubInterface {
 }

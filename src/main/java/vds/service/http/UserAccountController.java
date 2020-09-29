@@ -2,6 +2,7 @@ package vds.service.http;
 
 import vds.dto.deposit.DepositFromMobileRequest;
 import vds.dto.transfer.MoneyByUserIDRequest;
+import vds.spi.AccountServiceInterface;
 import vds.spi.IUserAccountService;
 import vds.dto.request.*;
 import vds.dto.output.DepositResponse;
@@ -19,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value="users/account")
 @Api(tags="UserAccount")
 public class UserAccountController {
-    private IUserAccountService _userAccountService;
+    private AccountServiceInterface _userAccountService;
 
-    public UserAccountController(IUserAccountService userAccountService) { this._userAccountService = userAccountService; }
+    public UserAccountController(AccountServiceInterface userAccountService) { this._userAccountService = userAccountService; }
 
     @ApiOperation(value = "Register Account ", tags = "UserAccount")
     @ApiResponses(value = {

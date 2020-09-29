@@ -7,25 +7,25 @@ import vds.dto.output.TransferMoneyResponse;
 import vds.api.*;
 import vds.api.interfaces.*;
 import vds.dto.transfer.MoneyByUserIDRequest;
-import vds.spi.DepositCredit;
-import vds.spi.IPublisher;
-import vds.spi.TransferCredit;
-import vds.spi.AccountService;
+import vds.spi.DepositCreditInterface;
+import vds.spi.PublisherInterface;
+import vds.spi.TransferCreditInterface;
+import vds.spi.AccountServiceInterface;
 
-public class UserAccountServiceImpl implements AccountService {
+public class UserAccountServiceImpl implements AccountServiceInterface {
     private UserAccountRepoInterface userAccountRepo;
     private UserMoneyRepoInterface userMoneyRepo;
     private UserMoneyAvailable userMoneyAvailable;
     private TrackingTransferRepoInterface trackingTransferRepo;
     private DepositRepoInterface depositRepo;
-    private IPublisher publisher;
+    private PublisherInterface publisher;
 
-    private DepositCredit depositDelegation;
-    private TransferCredit transferCredit;
+    private DepositCreditInterface depositDelegation;
+    private TransferCreditInterface transferCredit;
 
     public UserAccountServiceImpl(UserAccountRepoInterface userAccountRepo, TrackingTransferRepoInterface trackingTransferRepo,
                                   UserMoneyRepoInterface userMoneyRepo, UserMoneyAvailable userMoneyAvailable,
-                                  DepositRepoInterface depositRepo, IPublisher publisher){
+                                  DepositRepoInterface depositRepo, PublisherInterface publisher){
         this.userAccountRepo = userAccountRepo;
         this.userMoneyRepo = userMoneyRepo;
         this.userMoneyAvailable = userMoneyAvailable;

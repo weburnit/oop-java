@@ -1,10 +1,10 @@
 package vds.infrastructure.publisher;
 
-import vds.spi.IPublisher;
+import vds.spi.PublisherInterface;
 import org.springframework.stereotype.Service;
 
 @Service
-class Publisher implements IPublisher
+class Publisher implements PublisherInterface
 {
     public void Publish(Object o)
     {

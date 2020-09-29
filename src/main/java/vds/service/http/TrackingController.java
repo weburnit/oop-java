@@ -1,6 +1,6 @@
 package vds.service.http;
 
-import vds.spi.ITrackingService;
+import vds.spi.TrackingServiceInterface;
 import vds.dto.request.RegisterAccountRequest;
 import vds.dto.output.TrackingTransferResponse;
 import io.swagger.annotations.Api;
@@ -18,9 +18,9 @@ import java.util.List;
 @RequestMapping(value="tracking")
 @Api(tags="Tracking")
 public class TrackingController {
-    private ITrackingService trackingService;
+    private TrackingServiceInterface trackingService;
 
-    public TrackingController(ITrackingService trackingService) { this.trackingService = trackingService; }
+    public TrackingController(TrackingServiceInterface trackingService) { this.trackingService = trackingService; }
 
     @ApiOperation(value = "transfer ", tags = "Transfer")
     @ApiResponses(value = {

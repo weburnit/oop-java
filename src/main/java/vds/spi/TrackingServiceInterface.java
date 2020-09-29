@@ -4,6 +4,6 @@ import vds.dto.output.TrackingTransferResponse;
 
 import java.util.List;
 
-public interface ITrackingService {
+public interface TrackingServiceInterface {
     List<TrackingTransferResponse> ListTrackingTransfer();
 }

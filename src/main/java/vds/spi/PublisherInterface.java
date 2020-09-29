@@ -1,6 +1,6 @@
 package vds.spi;
 
-public interface IPublisher
+public interface PublisherInterface
 {
     void Publish(Object o);
 }
