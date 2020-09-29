@@ -61,11 +61,20 @@ abstract class JsonPayload {
 
 EventContract <|-- JsonPayload
 
+package Json {
+    JsonPayload <|-- AccountRegistered
+    JsonPayload <|-- AccountCredited
+}
+
 abstract class GrpcPayload {
     []byte getRawPayload()
 }
 EventContract <|-- GrpcPayload
 
+package Grpc {
+   GrpcPayload <|-- GrpcAccountRegistered
+   GrpcPayload <|-- GrpcAccountCredited
+}
 Publisher <|-up- KafkaPubSub
 Publisher <|-up- AMPPubSub
 

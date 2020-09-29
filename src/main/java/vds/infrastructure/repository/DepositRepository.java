@@ -1,13 +1,11 @@
 package vds.infrastructure.repository;
 
 import vds.api.Deposit;
-import vds.api.interfaces.DepositRepoInterface;
-import org.springframework.stereotype.Service;
+import vds.api.interfaces.IDepositRepo;
 
 import java.util.List;
 
-@Service
-public class DepositRepository implements DepositRepoInterface {
+public class DepositRepository implements IDepositRepo {
     @Override
     public Error Create(Deposit deposit) {
         return null;
