@@ -5,7 +5,7 @@ import vds.api.UserAccount;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserAccountRepositoryInterface implements UserAccountRepoInterface {
+public class UserAccountRepository implements UserAccountRepoInterface {
 
     @Override
     public Error Create(vds.api.UserAccount userAccount) {

@@ -5,7 +5,7 @@ import vds.api.UserMoney;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserMoneyRepositoryInterface implements UserMoneyRepoInterface {
+public class UserMoneyRepository implements UserMoneyRepoInterface {
     @Override
     public UserMoney GetByID(int ID) {
         // Should use transaction

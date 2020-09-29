@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DepositRepositoryInterface implements DepositRepoInterface {
+public class DepositRepository implements DepositRepoInterface {
     @Override
     public Error Create(Deposit deposit) {
         return null;

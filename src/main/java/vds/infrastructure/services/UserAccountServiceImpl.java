@@ -15,7 +15,7 @@ import vds.spi.AccountService;
 public class UserAccountServiceImpl implements AccountService {
     private UserAccountRepoInterface userAccountRepo;
     private UserMoneyRepoInterface userMoneyRepo;
-    private UserMoneyAvailableInterface userMoneyAvailable;
+    private UserMoneyAvailable userMoneyAvailable;
     private TrackingTransferRepoInterface trackingTransferRepo;
     private DepositRepoInterface depositRepo;
     private IPublisher publisher;
@@ -24,7 +24,7 @@ public class UserAccountServiceImpl implements AccountService {
     private TransferCredit transferCredit;
 
     public UserAccountServiceImpl(UserAccountRepoInterface userAccountRepo, TrackingTransferRepoInterface trackingTransferRepo,
-                                  UserMoneyRepoInterface userMoneyRepo, UserMoneyAvailableInterface userMoneyAvailable,
+                                  UserMoneyRepoInterface userMoneyRepo, UserMoneyAvailable userMoneyAvailable,
                                   DepositRepoInterface depositRepo, IPublisher publisher){
         this.userAccountRepo = userAccountRepo;
         this.userMoneyRepo = userMoneyRepo;

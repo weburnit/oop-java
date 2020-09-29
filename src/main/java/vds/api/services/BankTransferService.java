@@ -2,21 +2,21 @@ package vds.api.services;
 
 import vds.api.interfaces.ProviderTransferInterface;
 
-public class BankTransferInterfaceService implements ProviderTransferInterface {
+public class BankTransferService implements ProviderTransferInterface {
     public String Operator;
     public String CardNumber;
     public String CardNumberSecret;
     public int SecretCode;
 
 
-    private BankTransferInterfaceService(String operator, String cardNumber, int secretCode){
+    private BankTransferService(String operator, String cardNumber, int secretCode){
         this.Operator = operator;
         this.CardNumber = cardNumber;
         this.SecretCode = secretCode;
     }
 
-    public static BankTransferInterfaceService Create(String operator, String cardNumber, int secretCode) {
-        return new BankTransferInterfaceService(operator, cardNumber, secretCode);
+    public static BankTransferService Create(String operator, String cardNumber, int secretCode) {
+        return new BankTransferService(operator, cardNumber, secretCode);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package vds.api;
 
 import vds.api.interfaces.ProviderAccountInterface;
-import vds.api.services.EmailAccountInterface;
-import vds.api.services.MobileAccountInterface;
+import vds.api.services.EmailAccount;
+import vds.api.services.MobileAccount;
 
 public class UserAccount {
     private ProviderAccountInterface providerAccount;
@@ -19,7 +19,7 @@ public class UserAccount {
     }
 
     public static UserAccount Create(String mobileNUmber) {
-        ProviderAccountInterface mobileAccount = MobileAccountInterface.Create(mobileNUmber);
+        ProviderAccountInterface mobileAccount = MobileAccount.Create(mobileNUmber);
         return new UserAccount(mobileAccount,mobileNUmber);
     }
 
@@ -47,7 +47,7 @@ public class UserAccount {
         if (email == "") {
            return this;
         }
-        ProviderAccountInterface emailAccount = EmailAccountInterface.Create(email);
+        ProviderAccountInterface emailAccount = EmailAccount.Create(email);
         this.Email = email;
         return this;
     }

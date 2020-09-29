@@ -2,13 +2,13 @@ package vds.api.services;
 
 import vds.api.interfaces.ProviderAccountInterface;
 
-public class EmailAccountInterface implements ProviderAccountInterface {
+public class EmailAccount implements ProviderAccountInterface {
     public String Email;
 
-    private EmailAccountInterface(String email){ this.Email = email; }
+    private EmailAccount(String email){ this.Email = email; }
 
-    public static EmailAccountInterface Create(String email) {
-        return new EmailAccountInterface(email);
+    public static EmailAccount Create(String email) {
+        return new EmailAccount(email);
     }
 
     @Override

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TrackingTransferRepositoryInterface implements TrackingTransferRepoInterface {
+public class TrackingTransferRepository implements TrackingTransferRepoInterface {
     @Override
     public Error Create(TrackingTransfer trackingTransfer) {
         return null;
