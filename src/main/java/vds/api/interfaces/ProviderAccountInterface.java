@@ -1,6 +1,6 @@
 package vds.api.interfaces;
 
-public interface IProviderAccount {
+public interface ProviderAccountInterface {
     Error Register();
     Error ValidateAccount(String code);
 }

@@ -1,13 +1,13 @@
 package vds.infrastructure.repository;
 
-import vds.api.interfaces.ITrackingTransferRepo;
+import vds.api.interfaces.TrackingTransferRepoInterface;
 import vds.api.TrackingTransfer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TrackingTransferRepository implements ITrackingTransferRepo {
+public class TrackingTransferRepositoryInterface implements TrackingTransferRepoInterface {
     @Override
     public Error Create(TrackingTransfer trackingTransfer) {
         return null;

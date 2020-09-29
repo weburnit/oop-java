@@ -1,9 +1,9 @@
 package vds.api;
 
-import vds.api.interfaces.IUserMoneyAvailable;
+import vds.api.interfaces.UserMoneyAvailableInterface;
 
 public class UserMoney {
-    private IUserMoneyAvailable userMoneyAvailable;
+    private UserMoneyAvailableInterface userMoneyAvailable;
 
     public int UserID;
     public double AvailableMoney;
@@ -19,7 +19,7 @@ public class UserMoney {
         return new UserMoney(userID,availableMoney,beforeMoney);
     }
 
-    public UserMoney WithUserMoneyAvailable (IUserMoneyAvailable userMoneyAvailable) {
+    public UserMoney WithUserMoneyAvailable (UserMoneyAvailableInterface userMoneyAvailable) {
         this.userMoneyAvailable = userMoneyAvailable;
         return this;
     }

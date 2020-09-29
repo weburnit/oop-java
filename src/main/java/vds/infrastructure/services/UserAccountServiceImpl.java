@@ -13,19 +13,19 @@ import vds.spi.TransferCredit;
 import vds.spi.AccountService;
 
 public class UserAccountServiceImpl implements AccountService {
-    private IUserAccountRepo userAccountRepo;
-    private IUserMoneyRepo userMoneyRepo;
-    private IUserMoneyAvailable userMoneyAvailable;
-    private ITrackingTransferRepo trackingTransferRepo;
-    private IDepositRepo depositRepo;
+    private UserAccountRepoInterface userAccountRepo;
+    private UserMoneyRepoInterface userMoneyRepo;
+    private UserMoneyAvailableInterface userMoneyAvailable;
+    private TrackingTransferRepoInterface trackingTransferRepo;
+    private DepositRepoInterface depositRepo;
     private IPublisher publisher;
 
     private DepositCredit depositDelegation;
     private TransferCredit transferCredit;
 
-    public UserAccountServiceImpl(IUserAccountRepo userAccountRepo, ITrackingTransferRepo trackingTransferRepo,
-                                  IUserMoneyRepo userMoneyRepo, IUserMoneyAvailable userMoneyAvailable,
-                                  IDepositRepo depositRepo, IPublisher publisher){
+    public UserAccountServiceImpl(UserAccountRepoInterface userAccountRepo, TrackingTransferRepoInterface trackingTransferRepo,
+                                  UserMoneyRepoInterface userMoneyRepo, UserMoneyAvailableInterface userMoneyAvailable,
+                                  DepositRepoInterface depositRepo, IPublisher publisher){
         this.userAccountRepo = userAccountRepo;
         this.userMoneyRepo = userMoneyRepo;
         this.userMoneyAvailable = userMoneyAvailable;

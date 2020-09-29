@@ -4,7 +4,7 @@ import vds.api.TrackingTransfer;
 
 import java.util.List;
 
-public interface ITrackingTransferRepo {
+public interface TrackingTransferRepoInterface {
     Error Create(TrackingTransfer trackingTransfer);
     List<TrackingTransfer> ListTrackingTransfers();
 }

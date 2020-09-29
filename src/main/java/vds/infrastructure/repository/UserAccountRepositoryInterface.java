@@ -1,11 +1,11 @@
 package vds.infrastructure.repository;
 
-import vds.api.interfaces.IUserAccountRepo;
+import vds.api.interfaces.UserAccountRepoInterface;
 import vds.api.UserAccount;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserAccountRepository implements IUserAccountRepo {
+public class UserAccountRepositoryInterface implements UserAccountRepoInterface {
 
     @Override
     public Error Create(vds.api.UserAccount userAccount) {

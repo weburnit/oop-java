@@ -1,11 +1,11 @@
 package vds.api;
 
-import vds.api.interfaces.IProviderTransfer;
-import vds.api.services.BankTransferService;
+import vds.api.interfaces.ProviderTransferInterface;
+import vds.api.services.BankTransferInterfaceService;
 import vds.api.services.MobileMoneyService;
 
 public class Deposit {
-    private IProviderTransfer providerTransfer;
+    private ProviderTransferInterface providerTransfer;
 
     public int DepositID;
     public int UserID;
@@ -27,7 +27,7 @@ public class Deposit {
     }
 
     public Deposit WithBankProvider(String operator, String cardNumber, int secretCode){
-        this.providerTransfer = BankTransferService.Create(operator, cardNumber, secretCode);
+        this.providerTransfer = BankTransferInterfaceService.Create(operator, cardNumber, secretCode);
         this.Operator = operator;
         this._OperatorType = OperatorType.TypeBank;
         return this;

@@ -1,11 +1,11 @@
 package vds.api;
 
-import vds.api.interfaces.IProviderAccount;
-import vds.api.services.EmailAccount;
-import vds.api.services.MobileAccount;
+import vds.api.interfaces.ProviderAccountInterface;
+import vds.api.services.EmailAccountInterface;
+import vds.api.services.MobileAccountInterface;
 
 public class UserAccount {
-    private IProviderAccount providerAccount;
+    private ProviderAccountInterface providerAccount;
 
     //should use UUID
     public int UserID;
@@ -13,13 +13,13 @@ public class UserAccount {
     public String Email;
     public int Status;
 
-    private UserAccount(IProviderAccount providerAccount, String mobileNUmber){
+    private UserAccount(ProviderAccountInterface providerAccount, String mobileNUmber){
        this.providerAccount = providerAccount;
        this.MobileNUmber = mobileNUmber;
     }
 
     public static UserAccount Create(String mobileNUmber) {
-        IProviderAccount mobileAccount = MobileAccount.Create(mobileNUmber);
+        ProviderAccountInterface mobileAccount = MobileAccountInterface.Create(mobileNUmber);
         return new UserAccount(mobileAccount,mobileNUmber);
     }
 
@@ -47,7 +47,7 @@ public class UserAccount {
         if (email == "") {
            return this;
         }
-        IProviderAccount emailAccount = EmailAccount.Create(email);
+        ProviderAccountInterface emailAccount = EmailAccountInterface.Create(email);
         this.Email = email;
         return this;
     }

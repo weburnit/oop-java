@@ -4,7 +4,7 @@ import vds.api.Deposit;
 
 import java.util.List;
 
-public interface IDepositRepo {
+public interface DepositRepoInterface {
     Error Create(Deposit deposit);
     List<Deposit> ListDeposit();
 }

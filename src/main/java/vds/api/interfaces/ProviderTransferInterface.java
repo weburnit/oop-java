@@ -1,6 +1,6 @@
 package vds.api.interfaces;
 
-public interface IProviderTransfer {
+public interface ProviderTransferInterface {
     Error DepositMoney(double money);
     String GetCardNumberSecret();
 }

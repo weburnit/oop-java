@@ -1,5 +1,5 @@
 package vds.api.interfaces;
 
-public interface IUserMoneyAvailable {
+public interface UserMoneyAvailableInterface {
     boolean CheckMoneyAvailable(double availableMoney, double subMoney);
 }

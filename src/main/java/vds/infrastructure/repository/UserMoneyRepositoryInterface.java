@@ -1,11 +1,11 @@
 package vds.infrastructure.repository;
 
-import vds.api.interfaces.IUserMoneyRepo;
+import vds.api.interfaces.UserMoneyRepoInterface;
 import vds.api.UserMoney;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserMoneyRepository implements IUserMoneyRepo {
+public class UserMoneyRepositoryInterface implements UserMoneyRepoInterface {
     @Override
     public UserMoney GetByID(int ID) {
         // Should use transaction

@@ -1,8 +1,8 @@
 package vds.api.services;
 
-import vds.api.interfaces.IProviderTransfer;
+import vds.api.interfaces.ProviderTransferInterface;
 
-public class MobileMoneyService implements IProviderTransfer {
+public class MobileMoneyService implements ProviderTransferInterface {
 
     public String Operator;
     public String CardNumber;
