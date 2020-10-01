@@ -1,9 +1,8 @@
 package vds.infrastructure.events;
 
 import vds.infrastructure.adapter.PubSubFactoryInterface;
-import vds.spi.IPublisher;
 
-class Publisher implements IPublisher {
+class Publisher {
     PubSubFactoryInterface factory;
 
     public Publisher(PubSubFactoryInterface factory) {
