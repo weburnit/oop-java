@@ -1,5 +1,5 @@
 package vds.spi;
 
 public interface PubSub {
-    void Publish(Object o);
+    void send(Object o);
 }

@@ -4,7 +4,7 @@ import vds.dto.output.TransferMoneyResponse;
 import vds.dto.request.TransferMoneyByMobileNumberRequest;
 import vds.dto.transfer.MoneyByUserIDRequest;
 
-public interface TransferCreditInterface {
+public interface TransferCredit {
     TransferMoneyResponse TransferMoneyByUserID (int senderID, MoneyByUserIDRequest request);
     TransferMoneyResponse TransferMoneyByMobileNumber (int senderID, TransferMoneyByMobileNumberRequest request);
 }
