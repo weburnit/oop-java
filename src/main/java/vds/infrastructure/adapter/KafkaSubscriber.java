@@ -1,10 +1,14 @@
 package vds.infrastructure.adapter;
 
+import org.apache.camel.impl.DefaultCamelContext;
 import vds.spi.PubSub;
 
 public class KafkaSubscriber implements PubSub {
-    @Override
-    public void Publish(Object o) {
+    public KafkaSubscriber() {
+        DefaultCamelContext camelContext = new DefaultCamelContext();
+    }
 
+    @Override
+    public void send(Object o) {
     }
 }

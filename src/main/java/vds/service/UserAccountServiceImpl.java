@@ -1,4 +1,4 @@
-package vds.infrastructure.services;
+package vds.service;
 
 import vds.dto.deposit.DepositFromMobileRequest;
 import vds.dto.request.*;
@@ -7,31 +7,33 @@ import vds.dto.output.TransferMoneyResponse;
 import vds.api.*;
 import vds.api.interfaces.*;
 import vds.dto.transfer.MoneyByUserIDRequest;
-import vds.spi.DepositCreditInterface;
-import vds.spi.PublisherInterface;
-import vds.spi.TransferCreditInterface;
-import vds.spi.AccountServiceInterface;
+import vds.spi.DepositCredit;
+import vds.spi.Publisher;
+import vds.spi.TransferCredit;
+import vds.spi.AccountService;
 
-public class UserAccountServiceImpl implements AccountServiceInterface {
+public class UserAccountServiceImpl implements AccountService {
     private UserAccountRepoInterface userAccountRepo;
     private UserMoneyRepoInterface userMoneyRepo;
     private UserMoneyAvailable userMoneyAvailable;
     private TrackingTransferRepoInterface trackingTransferRepo;
     private DepositRepoInterface depositRepo;
-    private PublisherInterface publisher;
+    private Publisher publisher;
 
-    private DepositCreditInterface depositDelegation;
-    private TransferCreditInterface transferCredit;
+    private DepositCredit depositDelegation;
+    private TransferCredit transferCredit;
 
     public UserAccountServiceImpl(UserAccountRepoInterface userAccountRepo, TrackingTransferRepoInterface trackingTransferRepo,
                                   UserMoneyRepoInterface userMoneyRepo, UserMoneyAvailable userMoneyAvailable,
-                                  DepositRepoInterface depositRepo, PublisherInterface publisher){
+                                  DepositRepoInterface depositRepo, Publisher publisher, DepositCredit depositDelegation, TransferCredit transferCredit){
         this.userAccountRepo = userAccountRepo;
         this.userMoneyRepo = userMoneyRepo;
         this.userMoneyAvailable = userMoneyAvailable;
         this.trackingTransferRepo = trackingTransferRepo;
         this.publisher = publisher;
         this.depositRepo = depositRepo;
+        this.depositDelegation = depositDelegation;
+        this.transferCredit = transferCredit;
     }
 
     @Override
@@ -79,11 +81,11 @@ public class UserAccountServiceImpl implements AccountServiceInterface {
     @Override
     public DepositResponse DepositFromMobileCard(int currentUser, DepositFromMobileRequest request) {
         UserMoney userMoney = userMoneyRepo.GetByID(currentUser);
-        Deposit deposit = Deposit.Create(currentUser).WithMobileProvider(request.Operator,request.CardNumber);
+        DepositService deposit = DepositService.Create(currentUser).WithMobileProvider(request.Operator,request.CardNumber);
         return deposit(userMoney, deposit, request.MoneyNumber);
     }
 
-    private DepositResponse deposit(UserMoney userMoney, Deposit deposit, double moneyNumber) {
+    private DepositResponse deposit(UserMoney userMoney, DepositService deposit, double moneyNumber) {
         Error err = deposit.Deposit(moneyNumber);
         depositRepo.Create(deposit);
         if ( err != null ) {

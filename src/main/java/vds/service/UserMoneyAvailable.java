@@ -1,4 +1,4 @@
-package vds.infrastructure.services;
+package vds.service;
 
 import org.springframework.stereotype.Service;
 

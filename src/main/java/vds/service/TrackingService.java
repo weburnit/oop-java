@@ -1,16 +1,15 @@
-package vds.infrastructure.services;
+package vds.service;
 
 import vds.dto.output.TrackingTransferResponse;
 import vds.api.interfaces.TrackingTransferRepoInterface;
 import vds.api.TrackingTransfer;
 import org.springframework.stereotype.Service;
-import vds.spi.TrackingServiceInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TrackingService implements TrackingServiceInterface {
+public class TrackingService implements vds.spi.TrackingService {
     private TrackingTransferRepoInterface trackingTransferRepo;
 
     public TrackingService(TrackingTransferRepoInterface trackingTransferRepo){

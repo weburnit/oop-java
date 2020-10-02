@@ -1,8 +1,8 @@
-package vds.service.http;
+package vds.infrastructure.http;
 
 import vds.dto.deposit.DepositFromMobileRequest;
 import vds.dto.transfer.MoneyByUserIDRequest;
-import vds.spi.AccountServiceInterface;
+import vds.spi.AccountService;
 import vds.dto.request.*;
 import vds.dto.output.DepositResponse;
 import vds.dto.output.TransferMoneyResponse;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value="users/account")
 @Api(tags="UserAccount")
 public class UserAccountController {
-    private AccountServiceInterface _userAccountService;
+    private AccountService serviceProvider;
 
 //    public UserAccountController(AccountServiceInterface userAccountService) { this._userAccountService = userAccountService; }
 
@@ -28,7 +28,7 @@ public class UserAccountController {
             @ApiResponse(code = 200, message = "Suceess|OK")})
     @RequestMapping(value = "register",method = RequestMethod.POST, consumes={"application/json"})
     public Error RegisterAccount(@RequestBody RegisterAccountRequest request) {
-        return _userAccountService.RegisterAccount(request);
+        return serviceProvider.RegisterAccount(request);
     }
 
     @ApiOperation(value = "Active Account ", tags = "UserAccount")
@@ -36,7 +36,7 @@ public class UserAccountController {
             @ApiResponse(code = 200, message = "Suceess|OK")})
     @RequestMapping(value = "active",method = RequestMethod.POST, consumes={"application/json"})
     public Error ActiveAccount(@RequestBody ActiveAccountRequest request) {
-        return _userAccountService.ActiveAccount(request);
+        return serviceProvider.ActiveAccount(request);
     }
 
     @ApiOperation(value = "Transfer Account By UserID", tags = "UserAccount")
@@ -46,7 +46,7 @@ public class UserAccountController {
     public TransferMoneyResponse TransferMoneyByUserID(@RequestBody MoneyByUserIDRequest request) {
         //Get current User from token
         int currentUser = 2;
-        return _userAccountService.TransferMoneyByUserID(currentUser, request);
+        return serviceProvider.TransferMoneyByUserID(currentUser, request);
     }
 
     @ApiOperation(value = "Transfer Account By Mobile Number", tags = "UserAccount")
@@ -56,7 +56,7 @@ public class UserAccountController {
     public TransferMoneyResponse TransferMoneyByMobileNumber(@RequestBody TransferMoneyByMobileNumberRequest request) {
         //Get current User from token
         int currentUser = 2;
-        return _userAccountService.TransferMoneyByMobileNumber(currentUser, request);
+        return serviceProvider.TransferMoneyByMobileNumber(currentUser, request);
     }
 
     @ApiOperation(value = "Deposit Account By Bank transfer", tags = "UserAccount")
@@ -66,7 +66,7 @@ public class UserAccountController {
     public DepositResponse DepositFromBank(@RequestBody DepositFromBankRequest request) {
         //Get current User from token
         int currentUser = 2;
-        return _userAccountService.DepositFromBank(currentUser, request);
+        return serviceProvider.DepositFromBank(currentUser, request);
     }
 
     @ApiOperation(value = "Deposit Account By Mobile Card", tags = "UserAccount")
@@ -76,10 +76,6 @@ public class UserAccountController {
     public DepositResponse DepositFromMobileCard(@RequestBody DepositFromMobileRequest request) {
         //Get current User from token
         int currentUser = 2;
-        return _userAccountService.DepositFromMobileCard(currentUser, request);
+        return serviceProvider.DepositFromMobileCard(currentUser, request);
     }
-
-
-
-
 }

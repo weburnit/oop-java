@@ -1,17 +1,16 @@
 package vds.infrastructure.events;
 
 import vds.infrastructure.adapter.PubSubFactoryInterface;
+import vds.spi.PubSub;
 
-class Publisher {
-    PubSubFactoryInterface factory;
+public class Publisher {
+    PubSub producer;
 
-    public Publisher(PubSubFactoryInterface factory) {
-        this.factory = factory;
+    public Publisher(PubSubFactoryInterface factory, String topic) {
+        this.producer = factory.createSubscriberWithTopic(topic);
     }
 
-    public void Publish(Object o) {
-        this.factory.createSubscriberWithTopic("my_topic").Publish(o);
+    public void sendMessage(Object o) {
+        this.producer.send(o);
     }
-
 }
-
