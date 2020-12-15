@@ -1,4 +1,4 @@
-package vds.api.services;
+package vds.api.model;
 
 import vds.api.interfaces.ProviderTransferInterface;
 

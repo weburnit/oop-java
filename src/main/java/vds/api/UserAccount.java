@@ -1,8 +1,8 @@
 package vds.api;
 
 import vds.api.interfaces.ProviderAccountInterface;
-import vds.api.services.EmailAccount;
-import vds.api.services.MobileAccount;
+import vds.api.model.EmailAccount;
+import vds.api.model.MobileAccount;
 
 public class UserAccount {
     private ProviderAccountInterface providerAccount;

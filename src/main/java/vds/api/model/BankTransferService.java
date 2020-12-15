@@ -1,4 +1,4 @@
-package vds.api.services;
+package vds.api.model;
 
 import vds.api.interfaces.ProviderTransferInterface;
 
@@ -8,15 +8,28 @@ public class BankTransferService implements ProviderTransferInterface {
     public String CardNumberSecret;
     public int SecretCode;
 
+    public interface TransferProtocol {
+        void write(Object me);
+    }
 
-    private BankTransferService(String operator, String cardNumber, int secretCode){
+    public interface WireTransferInterface {
+        void transferCredit(BankTransferDTO req, TransferProtocol protocol);
+    }
+
+    private WireTransferInterface delegationWireTransfer;
+
+    private BankTransferService(String operator,
+                                String cardNumber,
+                                int secretCode,
+                                WireTransferInterface delegationWireTransfer){
         this.Operator = operator;
         this.CardNumber = cardNumber;
         this.SecretCode = secretCode;
+        this.delegationWireTransfer = delegationWireTransfer;
     }
 
     public static BankTransferService Create(String operator, String cardNumber, int secretCode) {
-        return new BankTransferService(operator, cardNumber, secretCode);
+        return new BankTransferService(operator, cardNumber, secretCode, null);
     }
 
     @Override
@@ -25,6 +38,7 @@ public class BankTransferService implements ProviderTransferInterface {
 
         //Get from bank
         this.CardNumberSecret = "429xxxxxxxx1123";
+//        this.delegationWireTransfer.transferCredit(new BankTransferDTO());
         return null;
     }
 

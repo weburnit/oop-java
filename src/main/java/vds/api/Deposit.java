@@ -1,8 +1,8 @@
 package vds.api;
 
 import vds.api.interfaces.ProviderTransferInterface;
-import vds.api.services.BankTransferService;
-import vds.api.services.MobileMoneyService;
+import vds.api.model.BankTransferService;
+import vds.api.model.MobileMoneyService;
 
 public class Deposit {
     private ProviderTransferInterface providerTransfer;
