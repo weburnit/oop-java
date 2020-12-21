@@ -34,7 +34,7 @@
                 <version>${spring.boot.version}</version>
                 <configuration>
                     <executable>true</executable>
-                    <mainClass>orderManagement.vds.Program</mainClass>
+                    <mainClass>orderManagement.vds.App</mainClass>
                 </configuration>
                 <executions>
                     <execution>
