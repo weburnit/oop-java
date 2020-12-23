@@ -4,8 +4,10 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.Date;
+
 @Getter
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Event {
-    private final long ts; // timestamp
+    private final Date timestamp;
 }
