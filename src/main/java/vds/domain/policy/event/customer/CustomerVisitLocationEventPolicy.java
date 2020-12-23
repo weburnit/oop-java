@@ -1,11 +1,13 @@
 package vds.domain.policy.event.customer;
 
+import vds.domain.entity.promotion.Promotions;
 import vds.domain.event.customer.CustomerVisitLocationEvent;
 
-public class CustomerVisitLocationEventPolicy extends BaseCustomerEventPolicy<CustomerVisitLocationEvent> {
+public class CustomerVisitLocationEventPolicy extends CustomerEventPolicy<CustomerVisitLocationEvent, Promotions> {
+    private static final CustomerVisitLocationEventVisitor visitor = new CustomerVisitLocationEventVisitor();
 
     @Override
-    public void handle(CustomerVisitLocationEvent event) {
-
+    public Promotions handle(CustomerVisitLocationEvent event) {
+        return visitor.visit(event);
     }
 }

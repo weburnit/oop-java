@@ -6,6 +6,6 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class BaseEvent {
+public abstract class Event {
     private final long ts; // timestamp
 }

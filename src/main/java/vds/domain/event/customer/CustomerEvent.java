@@ -2,13 +2,13 @@ package vds.domain.event.customer;
 
 import lombok.Getter;
 import vds.domain.entity.customer.Customer;
-import vds.domain.event.BaseEvent;
+import vds.domain.event.Event;
 
 @Getter
-public abstract class BaseCustomerEvent extends BaseEvent {
+public abstract class CustomerEvent extends Event {
     private final Customer customer;
 
-    protected BaseCustomerEvent(Customer customer, long ts) {
+    protected CustomerEvent(Customer customer, long ts) {
         super(ts);
         this.customer = customer;
     }
