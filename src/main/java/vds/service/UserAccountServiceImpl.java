@@ -81,11 +81,11 @@ public class UserAccountServiceImpl implements AccountService {
     @Override
     public DepositResponse DepositFromMobileCard(int currentUser, DepositFromMobileRequest request) {
         UserMoney userMoney = userMoneyRepo.GetByID(currentUser);
-        DepositService deposit = DepositService.Create(currentUser).WithMobileProvider(request.Operator,request.CardNumber);
+        Deposit deposit = Deposit.Create(currentUser).WithMobileProvider(request.Operator,request.CardNumber);
         return deposit(userMoney, deposit, request.MoneyNumber);
     }
 
-    private DepositResponse deposit(UserMoney userMoney, DepositService deposit, double moneyNumber) {
+    private DepositResponse deposit(UserMoney userMoney, Deposit deposit, double moneyNumber) {
         Error err = deposit.Deposit(moneyNumber);
         depositRepo.Create(deposit);
         if ( err != null ) {

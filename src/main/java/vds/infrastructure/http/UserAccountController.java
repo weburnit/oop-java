@@ -62,7 +62,7 @@ public class UserAccountController {
     @ApiOperation(value = "Deposit Account By Bank transfer", tags = "UserAccount")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Suceess|OK")})
-    @RequestMapping(value = "deposit/mobile", method = RequestMethod.POST, consumes={"application/json"})
+    @RequestMapping(value = "deposit/bank", method = RequestMethod.POST, consumes={"application/json"})
     public DepositResponse DepositFromBank(@RequestBody DepositFromBankRequest request) {
         //Get current User from token
         int currentUser = 2;
