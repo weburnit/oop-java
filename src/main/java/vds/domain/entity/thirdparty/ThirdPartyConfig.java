@@ -4,5 +4,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public abstract class ThirdPartyConfig {
-    private final String partner;
+    private final String generalConfig0;
+    private final Integer generalConfig1;
+    private final Double generalConfig2;
 }
