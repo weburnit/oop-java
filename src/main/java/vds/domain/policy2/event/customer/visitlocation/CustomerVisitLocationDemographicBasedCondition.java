@@ -1,16 +1,16 @@
-package vds.domain.policy2.visitlocation;
+package vds.domain.policy2.event.customer.visitlocation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import vds.domain.entity.customer.Profile;
 import vds.domain.event.customer.CustomerVisitLocationEvent;
-import vds.domain.policy2.PolicyCondition;
+import vds.domain.policy2.event.customer.CustomerEventPolicyCondition;
 
 import java.lang.reflect.Field;
 import java.util.*;
 
 @AllArgsConstructor
-public class CustomerVisitLocationDemographicBasedCondition implements PolicyCondition<CustomerVisitLocationEvent> {
+public class CustomerVisitLocationDemographicBasedCondition implements CustomerEventPolicyCondition<CustomerVisitLocationEvent> {
     private final Map<String, Object> props;
 
     @Getter

@@ -1,19 +1,18 @@
-package vds.domain.policy2.visitlocation;
+package vds.domain.policy2.event.customer.visitlocation;
 
+import lombok.AllArgsConstructor;
 import vds.domain.entity.promotion.Promotion;
 import vds.domain.entity.promotion.discount.DiscountPromotion;
 import vds.domain.event.customer.CustomerVisitLocationEvent;
-import vds.domain.policy2.Policy;
 import vds.domain.policy2.PolicyConditionVisitor;
+import vds.domain.policy2.event.customer.CustomerEventPolicy;
+import vds.domain.policy2.event.customer.CustomerEventPolicyConditionVisitor;
 
-import java.util.Arrays;
 import java.util.List;
 
-public class CustomerVisitLocationDemographicPolicy extends Policy<CustomerVisitLocationEvent, Promotion> {
-    private static final List<PolicyConditionVisitor<CustomerVisitLocationEvent>> visitors = Arrays.asList(
-            new CustomerVisitLocationPolicyDemographicSeniorConditionVisitor(),
-            new CustomerVisitLocationPolicyDemographicJuniorConditionVisitor()
-    );
+@AllArgsConstructor
+public class CustomerVisitLocationDemographicPolicy extends CustomerEventPolicy<CustomerVisitLocationEvent, Promotion> {
+    private final List<CustomerEventPolicyConditionVisitor<CustomerVisitLocationEvent>> visitors;
 
     @Override
     public Promotion handle(CustomerVisitLocationEvent data) {

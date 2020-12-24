@@ -1,14 +1,14 @@
-package vds.domain.policy2.visitlocation;
+package vds.domain.policy2.event.customer.visitlocation;
 
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import vds.domain.event.customer.CustomerVisitLocationEvent;
-import vds.domain.policy2.PolicyCondition;
+import vds.domain.policy2.event.customer.CustomerEventPolicyCondition;
 
 import java.util.Map;
 
 @AllArgsConstructor
-public class CustomerVisitLocationTimeGeoBasedCondition implements PolicyCondition<CustomerVisitLocationEvent> {
+public class CustomerVisitLocationTimeGeoBasedCondition implements CustomerEventPolicyCondition<CustomerVisitLocationEvent> {
     private final Map<String, Object> props;
 
     @Override
