@@ -1,5 +1,5 @@
 package vds.domain.policy;
 
-public interface PolicyCondition<T, R> {
-    R handle(T data);
+public interface PolicyCondition<T> {
+    boolean handle(T data);
 }

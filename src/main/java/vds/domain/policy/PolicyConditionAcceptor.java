@@ -2,6 +2,6 @@ package vds.domain.policy;
 
 import vds.commons.visitor.Acceptor;
 
-public interface PolicyConditionAcceptor<T, R> extends Acceptor<T, R> {
-    R accept(PolicyConditionVisitor<T, R> visitor);
+public interface PolicyConditionAcceptor<T> extends Acceptor<T, Boolean> {
+    boolean accept(PolicyConditionVisitor<T> visitor);
 }

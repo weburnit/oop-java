@@ -1,10 +1,10 @@
-package vds.domain.policy2.event.customer.visitlocation;
+package vds.domain.policy.event.customer.visitlocation.base;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import vds.domain.entity.customer.Profile;
 import vds.domain.event.customer.CustomerVisitLocationEvent;
-import vds.domain.policy2.event.customer.CustomerEventPolicyCondition;
+import vds.domain.policy.event.customer.CustomerEventPolicyCondition;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -18,7 +18,9 @@ public class CustomerVisitLocationDemographicBasedCondition implements CustomerE
     private enum Operator {
         GT(">"),
         LT("<"),
-        EQ("=");
+        EQ("="),
+        GE(">="),
+        LE("<=");
 
         private final String value;
 

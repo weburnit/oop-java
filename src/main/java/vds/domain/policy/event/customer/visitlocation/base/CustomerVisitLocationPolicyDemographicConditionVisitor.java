@@ -1,14 +1,14 @@
-package vds.domain.policy2.event.customer.visitlocation;
+package vds.domain.policy.event.customer.visitlocation.base;
 
 import lombok.AllArgsConstructor;
 import vds.domain.event.customer.CustomerVisitLocationEvent;
-import vds.domain.policy2.event.customer.CustomerEventPolicyCondition;
-import vds.domain.policy2.event.customer.CustomerEventPolicyConditionVisitor;
+import vds.domain.policy.event.customer.CustomerEventPolicyCondition;
+import vds.domain.policy.event.customer.CustomerEventPolicyConditionVisitor;
 
 import java.util.*;
 
 @AllArgsConstructor
-public class CustomerVisitLocationPolicyDemographicJuniorConditionVisitor implements CustomerEventPolicyConditionVisitor<CustomerVisitLocationEvent> {
+public class CustomerVisitLocationPolicyDemographicConditionVisitor implements CustomerEventPolicyConditionVisitor<CustomerVisitLocationEvent> {
 
     private final List<CustomerEventPolicyCondition<CustomerVisitLocationEvent>> conditions;
 

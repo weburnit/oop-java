@@ -1,18 +1,10 @@
 package vds.domain.policy;
 
 import vds.domain.entity.promotion.Promotion;
-import vds.domain.entity.promotion.Promotions;
 import vds.domain.entity.promotion.discount.DiscountPromotion;
 import vds.domain.entity.promotion.text.TextPromotion;
 
 public class PromotionEvaluator implements PromotionVisitor {
-
-    @Override
-    public void visit(Promotions promotion) {
-        for (Promotion promo : promotion.getPromotions()) {
-            visit(promo);
-        }
-    }
 
     @Override
     public void visit(DiscountPromotion promotion) {
