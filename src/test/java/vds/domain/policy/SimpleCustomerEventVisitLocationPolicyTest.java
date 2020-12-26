@@ -1,6 +1,8 @@
 package vds.domain.policy;
 
 import org.junit.Test;
+import vds.commons.condition.Condition;
+import vds.commons.condition.Operator;
 import vds.domain.entity.customer.Customer;
 import vds.domain.entity.customer.Profile;
 import vds.domain.entity.promotion.Promotion;
@@ -18,22 +20,20 @@ import vds.domain.policy.event.customer.visitlocation.base.CustomerVisitLocation
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class SimpleCustomerEventVisitLocationPolicyTest {
     private static final PromotionEvaluator promotionEvaluator = new PromotionEvaluator();
 
     @Test
     public void seniorTest() {
-        Profile profile = new Profile(
-                "TEST2",
-                66,
-                "NOJOB",
-                "EN"
-        );
-        Customer customer = new Customer(
-                profile,
-                new HashMap<>()
-        );
+        Profile profile = Profile.builder()
+                .name("Jax Sparrow")
+                .age(66)
+                .job("unemployed")
+                .country("US")
+                .build();
+        Customer customer = Customer.builder().profile(profile).build();
         CustomerVisitLocationEvent event = new CustomerVisitLocationEvent(
                 customer,
                 "HCMC",
@@ -42,10 +42,8 @@ public class SimpleCustomerEventVisitLocationPolicyTest {
 
         List<CustomerVisitLocationDemographicBasedCondition> conditions;
         conditions = new ArrayList<>();
-        Map<String, Object> m = new HashMap<>();
-        m.put("target", Collections.singletonList("age"));
-        m.put("age_operator", ">");
-        m.put("age_value", 65);
+        Map<String, Condition> m = new HashMap<>();
+        m.put("age", new Condition<>(Operator.GT, 65));
         conditions.add(new CustomerVisitLocationDemographicBasedCondition(m));
 
         Promotion promotion = new DiscountPromotion("Hello senior", 84.0, null) {};
@@ -63,16 +61,13 @@ public class SimpleCustomerEventVisitLocationPolicyTest {
 
     @Test
     public void juniorTest() {
-        Profile profile = new Profile(
-                "TEST2",
-                23,
-                "NOJOB",
-                "EN"
-        );
-        Customer customer = new Customer(
-                profile,
-                new HashMap<>()
-        );
+        Profile profile = Profile.builder()
+                .name("Jax Sparrow Jr.")
+                .age(23)
+                .job("unemployed")
+                .country("US")
+                .build();
+        Customer customer = Customer.builder().profile(profile).build();
         CustomerVisitLocationEvent event = new CustomerVisitLocationEvent(
                 customer,
                 "HCMC",
@@ -81,10 +76,42 @@ public class SimpleCustomerEventVisitLocationPolicyTest {
 
         List<CustomerVisitLocationDemographicBasedCondition> conditions;
         conditions = new ArrayList<>();
-        Map<String, Object> m = new HashMap<>();
-        m.put("target", Collections.singletonList("age"));
-        m.put("age_operator", "<");
-        m.put("age_value", 24);
+        Map<String, Condition> m = new HashMap<>();
+        m.put("age", new Condition<>(Operator.LT, 24));
+        conditions.add(new CustomerVisitLocationDemographicBasedCondition(m));
+
+        Promotion promotion = new DiscountPromotion("Hello junor", null, 170_000L) {};
+
+        CustomerEventPolicy<CustomerVisitLocationEvent, Promotion> policy = new CustomerVisitLocationDemographicPolicy(
+                Collections.singletonList(
+                        new CustomerVisitLocationPolicyDemographicConditionVisitor(conditions)
+                ),
+                promotion
+        );
+        Promotion promo = policy.handle(event);
+        promotionEvaluator.visit(promo); // debug print
+        assertEquals(promo, new DiscountPromotion("Hello junor", null, 170_000L) {});
+    }
+
+    @Test(expected = ClassCastException.class)
+    public void exceptionTest() {
+        Profile profile = Profile.builder()
+                .name("Jax Sparrow Jr.")
+                .age(23)
+                .job("unemployed")
+                .country("US")
+                .build();
+        Customer customer = Customer.builder().profile(profile).build();
+        CustomerVisitLocationEvent event = new CustomerVisitLocationEvent(
+                customer,
+                "HCMC",
+                new Date(1608739450) // Wednesday, December 23, 2020 4:04:10 PM
+        );
+
+        List<CustomerVisitLocationDemographicBasedCondition> conditions;
+        conditions = new ArrayList<>();
+        Map<String, Condition> m = new HashMap<>();
+        m.put("age", new Condition<>(Operator.LT, "24")); // will throw exception if evaluate
         conditions.add(new CustomerVisitLocationDemographicBasedCondition(m));
 
         Promotion promotion = new DiscountPromotion("Hello junor", null, 170_000L) {};
@@ -102,29 +129,24 @@ public class SimpleCustomerEventVisitLocationPolicyTest {
 
     @Test
     public void timeGeoTest1() {
-        Profile profile = new Profile(
-                "TEST2",
-                23,
-                "NOJOB",
-                "EN"
-        );
-        Customer customer = new Customer(
-                profile,
-                new HashMap<>()
-        );
+        Profile profile = Profile.builder()
+                .name("Jax Sparrow Jr.")
+                .age(23)
+                .job("unemployed")
+                .country("US")
+                .build();
+        Customer customer = Customer.builder().profile(profile).build();
         CustomerVisitLocationEvent event = new CustomerVisitLocationEvent(
                 customer,
                 "HCMC",
                 new Date(1608739450) // Wednesday, December 23, 2020 4:04:10 PM
         );
 
-        List<CustomerVisitLocationTimeGeoBasedCondition> conditions;
-        conditions = new ArrayList<>();
-        Map<String, Object> m = new HashMap<>();
-        m.put("location", "HCMC");
-        m.put("from_hrs", 12);
-        m.put("to_hrs", 24);
-        conditions.add(new CustomerVisitLocationTimeGeoBasedCondition(m));
+        List<CustomerVisitLocationTimeGeoBasedCondition> conditions = new ArrayList<>();
+
+        conditions.add(new CustomerVisitLocationTimeGeoBasedCondition(
+                new CustomerVisitLocationTimeGeoBasedCondition.TimeGeoCondition("HCMC", 12, 24)
+        ));
 
         Promotion promotion = new TextPromotion("HCMC at night") {};
 
@@ -137,5 +159,39 @@ public class SimpleCustomerEventVisitLocationPolicyTest {
         Promotion promo = policy.handle(event);
         promotionEvaluator.visit(promo); // debug print
         assertEquals(promo, new TextPromotion("HCMC at night") {});
+    }
+
+    @Test
+    public void timeGeoNoPromoTest1() {
+        Profile profile = Profile.builder()
+                .name("Jax Sparrow Jr.")
+                .age(23)
+                .job("unemployed")
+                .country("US")
+                .build();
+        Customer customer = Customer.builder().profile(profile).build();
+        CustomerVisitLocationEvent event = new CustomerVisitLocationEvent(
+                customer,
+                "HCMC",
+                new Date(1608739450) // Wednesday, December 23, 2020 4:04:10 PM
+        );
+
+        List<CustomerVisitLocationTimeGeoBasedCondition> conditions = new ArrayList<>();
+
+        conditions.add(new CustomerVisitLocationTimeGeoBasedCondition(
+                new CustomerVisitLocationTimeGeoBasedCondition.TimeGeoCondition("HANOI", 12, 24)
+        ));
+
+        Promotion promotion = new TextPromotion("HCMC at night") {};
+
+        CustomerEventPolicy<CustomerVisitLocationEvent, Promotion> policy = new CustomerVisitLocationTimeGeoPolicy(
+                Collections.singletonList(
+                        new CustomerVisitLocationPolicyTimeGeoConditionVisitor(conditions)
+                ),
+                promotion
+        );
+        Promotion promo = policy.handle(event);
+        promotionEvaluator.visit(promo); // debug print
+        assertNull(promo); // no promotion
     }
 }
