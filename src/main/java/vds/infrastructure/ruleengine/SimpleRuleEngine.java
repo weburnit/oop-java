@@ -13,7 +13,7 @@ import java.util.Map;
 import static vds.infrastructure.ruleengine.state.State.*;
 import static vds.infrastructure.ruleengine.state.StateTransitionEvent.*;
 
-public class RuleEngine implements FSM<State, StateTransitionEvent> {
+public class SimpleRuleEngine implements FSM<State, StateTransitionEvent>, Engine, EnginePluginSocket {
     private static final DoubleKeyMap<State, StateTransitionEvent, State> transitionTable; // transitionTable
     static {
         transitionTable = new DoubleKeyMap<>();
@@ -122,5 +122,15 @@ public class RuleEngine implements FSM<State, StateTransitionEvent> {
 
     public void stop() {
         transition(ENGINE_STOP);
+    }
+
+    @Override
+    public void registerPlugin(Plugin plugin) {
+        this.engineState.registerPlugin(plugin);
+    }
+
+    @Override
+    public void deregisterPlugin(String identifier) {
+        this.engineState.deregisterPlugin(identifier);
     }
 }
