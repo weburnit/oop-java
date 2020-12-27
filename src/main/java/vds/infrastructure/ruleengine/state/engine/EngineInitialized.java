@@ -17,12 +17,12 @@ public class EngineInitialized implements EngineState {
 
     @Override
     public void registerPlugin(Plugin plugin) {
-
+        plugins.put(plugin.name(), plugin);
     }
 
     @Override
     public void deregisterPlugin(String pluginName) {
-
+        plugins.remove(pluginName);
     }
 
 }
