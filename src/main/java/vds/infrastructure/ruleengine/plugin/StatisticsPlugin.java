@@ -1,5 +1,6 @@
 package vds.infrastructure.ruleengine.plugin;
 
+import org.apache.commons.lang3.StringUtils;
 import vds.infrastructure.ruleengine.state.State;
 
 import java.util.HashMap;
@@ -11,9 +12,10 @@ public class StatisticsPlugin implements Plugin {
 
     public StatisticsPlugin() {
         stats = new HashMap<>();
-        for (State state : State.values()) {
-            stats.put(state, new AtomicInteger(0));
-        }
+        // only care about these 3 states
+        stats.put(State.RUNNING, new AtomicInteger(0));
+        stats.put(State.PAUSING, new AtomicInteger(0));
+        stats.put(State.STOPPED, new AtomicInteger(0));
     }
 
     @Override
@@ -24,21 +26,21 @@ public class StatisticsPlugin implements Plugin {
     @Override
     public void onEvent(State event) {
         stats.get(event).incrementAndGet();
-        printStats(); // print stats each time the engine change its status
     }
 
-    private void printStats() {
+    public String statsStr() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Statistic:\n");
+        sb.append("Statistics:\n");
         for (Map.Entry<State, AtomicInteger> entry : stats.entrySet()) {
             int value = entry.getValue().get();
-            sb.append(entry.getKey()).append("(").append(value).append(")");
-            sb.append(":");
+            sb
+                    .append("\t")
+                    .append(StringUtils.leftPad(entry.getKey() + "(" + value + "):", 20));
             for (int j = 0; j < value; j++) {
-                sb.append("]");
+                sb.append("▍");
             }
             sb.append("\n");
         }
-        System.out.println(sb.toString());
+        return sb.toString();
     }
 }

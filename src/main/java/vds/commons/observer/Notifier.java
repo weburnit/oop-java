@@ -7,7 +7,7 @@ public interface Notifier<T> {
 
     default void notifyEvent(T event) {
         for (Listener<T> listener : getListeners()) {
-            listener.listen(event);
+            listener.onEvent(event);
         }
     }
 }

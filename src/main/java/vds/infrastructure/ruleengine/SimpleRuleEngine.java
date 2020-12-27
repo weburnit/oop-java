@@ -94,6 +94,7 @@ public class SimpleRuleEngine implements FSM<State, StateTransitionEvent>, Engin
 
     //------------------------------------------------------------------------------------------------
 
+    @Override
     public void initialize() {
         try {
             plugins = new HashMap<>();
@@ -104,25 +105,32 @@ public class SimpleRuleEngine implements FSM<State, StateTransitionEvent>, Engin
         }
     }
 
+    @Override
     public void reset() {
         transition(RESET);
     }
 
+    @Override
     public void start() {
         transition(ENGINE_START);
     }
 
+    @Override
     public void pause() {
         transition(ENGINE_PAUSE);
     }
 
+    @Override
     public void resume() {
         transition(ENGINE_RESUME);
     }
 
+    @Override
     public void stop() {
         transition(ENGINE_STOP);
     }
+
+    //------------------------------------------------------------------------------------------------
 
     @Override
     public void registerPlugin(Plugin plugin) {
