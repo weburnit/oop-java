@@ -2,10 +2,11 @@ package vds.api.sm;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import vds.api.cor.AllocationEmitter.EventEmitter;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reward implements SMEntity {
+public class Reward implements SMEntity, EventEmitter {
     private String id;
     private State state;
 
