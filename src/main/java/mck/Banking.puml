@@ -1,48 +1,20 @@
 @startuml
-
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
-}
-
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
-}
-
-@enduml
-
-@startuml
-
-interface AccountService {
+interface DigitalBankingService {
 + registerPaymentMethod()
 + registerAccount()
 + processDocs()
 - buildAccount()
 }
 
-class PosAccountService {}
+class PosDigitalBankingService {}
 
-class OnlineAccountService {}
+class OnlineDigitalBankingService {}
 
-class AffiliateAccountService {}
+class AffiliateDigitalBankingService {}
 
-AccountService <|-- PosAccountService
-AccountService <|-- OnlineAccountService
-AccountService <|-- AffiliateAccountService
+DigitalBankingService <|-- PosDigitalBankingService
+DigitalBankingService <|-- OnlineDigitalBankingService
+DigitalBankingService <|-- AffiliateDigitalBankingService
 
 interface Publisher {
     + sendMessage(EventContract e)
@@ -79,16 +51,16 @@ Publisher <|-up- KafkaPubSub
 Publisher <|-up- AMPPubSub
 
 class OnlineBanking {
-   - AccountService provider
+   - DigitalBankingService provider
    - Publisher publisher
    + registerAccount()
 }
 
 Publisher -down-> OnlineBanking
-AccountService -right-> OnlineBanking
+DigitalBankingService -right-> OnlineBanking
 
 interface TransferCredit
 interface DepositCredit
-TransferCredit <|-- AccountService
-DepositCredit <|-- AccountService
+TransferCredit <|-- DigitalBankingService
+DepositCredit <|-- DigitalBankingService
 @enduml
