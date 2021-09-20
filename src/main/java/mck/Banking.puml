@@ -50,14 +50,14 @@ package Grpc {
 Publisher <|-up- KafkaPubSub
 Publisher <|-up- AMPPubSub
 
-class OnlineBanking {
+class PosBankingService {
    - DigitalBankingService provider
    - Publisher publisher
    + registerAccount()
 }
 
-Publisher -down-> OnlineBanking
-DigitalBankingService -right-> OnlineBanking
+Publisher -down-> PosBankingService
+DigitalBankingService -right-> PosBankingService
 
 interface TransferCredit
 interface DepositCredit
