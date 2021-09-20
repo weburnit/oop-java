@@ -8,7 +8,7 @@
     <artifactId>vds</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>vds</name>
+    <name>mck</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -34,7 +34,7 @@
                 <version>${spring.boot.version}</version>
                 <configuration>
                     <executable>true</executable>
-                    <mainClass>orderManagement.vds.Program</mainClass>
+                    <mainClass>orderManagement.mck.Program</mainClass>
                 </configuration>
                 <executions>
                     <execution>
