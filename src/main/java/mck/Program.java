@@ -9,6 +9,7 @@ public class Program {
         System.out.print("Hello World - Thai");
         System.out.print("Hello World - 1");
         System.out.print("Hello World - 2");
+        System.out.print("Hello World - McK");
         SpringApplication.run(Program.class, args);
     }
 }
