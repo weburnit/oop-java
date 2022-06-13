@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Program {
     public static void main(String[] args) throws Exception {
         System.out.print("Hello World - Thai");
-        System.out.print("Hello World - 1");
         System.out.print("Hello World - 2");
         SpringApplication.run(Program.class, args);
     }
