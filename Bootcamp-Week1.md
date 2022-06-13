@@ -1,1 +1,1 @@
-# Duong NX is here ^^
+# Duong NX is here.
